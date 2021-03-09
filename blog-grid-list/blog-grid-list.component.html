@@ -1,0 +1,16 @@
+<ng-container *ngIf="loadBlogs$|async as blogs">
+  <ul *ngIf="blogs.length;else notFound" class="blog-grid-list" [@fadeInAnimation]="blogs.length">
+    <li *ngFor="let blog of blogs;trackBy:trackById">
+      <xcdrs-blog-item
+        [blog]="blog">
+      </xcdrs-blog-item>
+    </li>
+  </ul>
+  <ng-template #notFound>
+    <xcdrs-empty-state
+      imgPath="/assets/images/empty-states/icon-empty-state-blog-links.svg"
+      text="No blog find!">
+    </xcdrs-empty-state>
+  </ng-template>
+</ng-container>
+

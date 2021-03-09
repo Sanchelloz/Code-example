@@ -1,0 +1,50 @@
+<ng-container *ngIf="feedback">
+  <div class="customer-info">
+    <img
+      *ngIf="feedback?.ProfileImageUrl"
+      class="customer-avatar"
+      [src]="feedback?.ProfileImageUrl"
+      [alt]="feedback?.LastName">
+
+    <img
+      *ngIf="!feedback?.ProfileImageUrl"
+      class="customer-avatar"
+      src="/assets/images/default_profile_picture.png"
+      alt="default_profile_picture">
+
+    <div class="customer-details">
+      <span
+        class="customer-name"
+        *ngIf="feedback?.FirstName&&feedback?.LastName">
+        {{feedback?.FirstName}} {{feedback?.LastName}}
+      </span>
+      <star-rating
+        *ngIf="feedback?.Rating"
+        [value]="feedback?.Rating"
+        size="24px"
+        [totalstars]="5"
+        checkedcolor="var(--primary-color)"
+        uncheckedcolor="#aaadb8"
+        readonly="true">
+      </star-rating>
+    </div>
+    <div class="date">
+      <span
+        *ngIf="feedback.CreateDate">
+        Created {{feedback.CreateDate|date:'d MMM y'}}
+      </span>
+      <span
+        *ngIf="feedback.UpdateDate">
+        , Updated {{feedback.UpdateDate|date:'d MMM y'}}
+      </span>
+    </div>
+  </div>
+
+  <xcdrs-read-more
+    class="feedback-text"
+    *ngIf="feedback?.Comment"
+    [text]="feedback?.Comment"
+    numberOfLines="5"
+    numberOfLinesForMobile="8">
+  </xcdrs-read-more>
+</ng-container>

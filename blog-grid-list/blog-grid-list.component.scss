@@ -1,0 +1,9 @@
+@import "src/app/theme/styles/variables";
+@import "src/app/theme/styles/mixins";
+
+.blog-grid-list {
+  @include clear-list();
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(361px, 1fr));
+  grid-gap: 24px;
+}

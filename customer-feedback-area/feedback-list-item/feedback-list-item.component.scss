@@ -1,0 +1,74 @@
+@import "src/app/theme/styles/variables";
+@import "src/app/theme/styles/mixins";
+
+:host {
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.customer-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  max-width: 250px;
+  overflow: hidden;
+
+  .customer-avatar {
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 48px;
+    height: 48px;
+  }
+
+  .customer-details {
+    display: flex;
+    flex-direction: column;
+    padding-left: 16px;
+    overflow: hidden;
+
+    .customer-name {
+      @include text-ellipsis();
+      font-weight: 800;
+      font-size: $f18;
+      color: $main-color;
+    }
+
+    star-rating {
+      margin-top: 8px;
+    }
+  }
+
+  .date {
+    padding-top: 8px;
+    width: 100%;
+    display: flex;
+    color: $sub-title-color;
+    font-size: $f12;
+  }
+}
+
+.feedback-text {
+  font-size: $f16;
+  line-height: 1.5;
+  color: $main-color;
+  max-width: 680px;
+  width: 100%;
+}
+
+
+@media only screen and (max-width: 768px) {
+  :host {
+    padding: 24px 0;
+  }
+
+  .customer-info {
+    max-width: none;
+  }
+
+  .feedback-text {
+    margin-top: 16px;
+  }
+}

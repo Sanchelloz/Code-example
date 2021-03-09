@@ -1,0 +1,46 @@
+<div class="d-flex flex-row justify-content-between align-content-center header">
+  <h1 class="section-title">Products</h1>
+  <button *ngIf="isAdmin" (click)="onProductAdd()" class="gradient-btn add-btn" mat-flat-button color="primary">
+    Add a Product
+  </button>
+</div>
+<mat-tab-group *ngIf="isAuthenticated" (selectedTabChange)="onTabChange($event)">
+  <mat-tab label="All Products"></mat-tab>
+  <ng-container *ngIf="categoryTypes$|async as categoryTypes">
+    <mat-tab
+      *ngFor="let categoryType of categoryTypes"
+      [aria-labelledby]="categoryType.TopicTypeId"
+      [label]="categoryType.TopicTypeName">
+    </mat-tab>
+  </ng-container>
+  <mat-tab label="My Products"></mat-tab>
+</mat-tab-group>
+<div class="row flex-nowrap toolbar">
+  <div class="col col-lg-11">
+    <xcdrs-products-toolbar
+      #productsToolbarComponent
+      [onlySearch]="false"
+      [organizationId]="organizationId"
+      (search)="onSearch($event)">
+    </xcdrs-products-toolbar>
+  </div>
+  <div *ngIf="!isMobilePlatform" class="col col-lg-1">
+    <xcdrs-products-display-mode-btn
+      [mode]="mode"
+      (modeChange)="setDisplayMode($event)">
+    </xcdrs-products-display-mode-btn>
+  </div>
+</div>
+<span *ngIf="dataSource.totalCount" class="product-counter">{{dataSource.totalCount}}
+  Product{{dataSource.totalCount === 1 ? '' : 's'}}</span>
+
+<ng-container [ngSwitch]="mode">
+  <xcdrs-products-table
+    *ngSwitchCase="ProductsDisplayMode.Table"
+    [dataSource]="dataSource">
+  </xcdrs-products-table>
+  <xcdrs-products-grid-list
+    *ngSwitchCase="ProductsDisplayMode.Grid"
+    [dataSource]="dataSource">
+  </xcdrs-products-grid-list>
+</ng-container>

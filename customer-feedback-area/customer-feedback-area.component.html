@@ -1,0 +1,39 @@
+<h2 class="section-title">Feedback</h2>
+
+<xcdrs-feedback-list
+  [feedbackItems]="feedbackItems">
+</xcdrs-feedback-list>
+
+<div class="action-btns">
+  <button
+    *ngIf="isCommentedBefore$|async;else leaveFeedback"
+    [class.btn-center]="feedbackItems.length<=2&&!loading"
+    (click)="navigateToFeedbackAction(feedbackAction.UPDATE)"
+    matRipple
+    class="action-btn leave-feedback-btn">
+    <i [inlineSVG]="'/assets/images/icons/comment-white.svg'"></i>
+    Update Feedback
+  </button>
+
+  <ng-template #leaveFeedback>
+    <button
+      [class.btn-center]="feedbackItems.length<=2&&!loading"
+      (click)="navigateToFeedbackAction(feedbackAction.ADD)"
+      matRipple
+      class="action-btn leave-feedback-btn">
+      <i [inlineSVG]="'/assets/images/icons/comment-white.svg'"></i>
+      Leave Feedback
+    </button>
+  </ng-template>
+
+  <button
+    *ngIf="feedbackItems.length>=3"
+    (click)="showAll()"
+    [disabled]="isAllRatings"
+    class="action-btn read-all-btn"
+    mat-stroked-button
+    color="primary">
+    <mat-spinner style="margin: 0 auto;" *ngIf="loading;else text" diameter="24"></mat-spinner>
+    <ng-template #text> Read All</ng-template>
+  </button>
+</div>

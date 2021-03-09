@@ -1,0 +1,8 @@
+<ul class="feedback-list">
+  <li class="feedback-list-item"
+      *ngFor="let feedback of feedbackItems;trackBy: trackById">
+    <xcdrs-feedback-list-item [feedback]="feedback">
+    </xcdrs-feedback-list-item>
+  </li>
+</ul>
+
